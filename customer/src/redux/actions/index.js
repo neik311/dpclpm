@@ -101,7 +101,8 @@ export const addOrder = (orderData) => async (dispatch) => {
     if (res.data.success) {
       dispatch({ type: ADD_ORDER, payload: true });
     } else {
-      alert("Số lượng đặt vượt quá số lượng tồn");
+     // alert("Số lượng đặt vượt quá số lượng tồn");
+      toast.error("Số lượng đặt vướt quá số lượng tồn");
     }
   } catch (err) {
     const message = err.response?.data?.message || "Lỗi kết nối server";

@@ -7,6 +7,7 @@ import { ADD_ORDER } from "../redux/actionTypes";
 import { useNavigate } from "react-router";
 import Title from "../components/Title";
 import IconCategory from "../components/IconCategory";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const Checkout = () => {
     }
 
     if (!nameRegex.test(shippingInfo.firstName) || !nameRegex.test(shippingInfo.lastName)) {
-      alert("Họ và tên không được chứa ký tự đặc biệt hoặc số.");
+      toast.error("Họ và tên không được chứa ký tự đặc biệt hoặc số.");
       return false;
     }
 
@@ -66,12 +67,14 @@ const Checkout = () => {
     }
 
     if (shippingInfo.address.length > 255) {
-      alert("Địa chỉ không được vượt quá 255 ký tự.");
+       toast.error("Địa chỉ không được vượt quá 255 ký tự.");
+      // alert("Địa chỉ không được vượt quá 255 ký tự.");
       return false;
     }
 
     if (!phoneRegex.test(shippingInfo.phone)) {
-      alert("Số điện thoại phải đúng 10 chữ số và không có ký tự đặc biệt.");
+     // alert("Số điện thoại phải đúng 10 chữ số và không có ký tự đặc biệt.");
+      toast.error("Số điện thoại phải đúng 10 chữ số và không có ký tự đặc biệt.");
       return false;
     }
 

@@ -28,6 +28,19 @@ test("Tìm kiếm theo từ khóa “Modern Duffle Bag”", async () => {
   const text = await element.getText();
   expect(text).toMatch(/Modern Duffle Bag/);
 
+  await element.click();
+
+  await driver.get("http://localhost:3000/product/38a2efd1-7900-4219-94a6-7f9d9a04cc87");
+
+  const elements2 = await driver.findElements(
+    By.xpath("//*[contains(text(), 'Modern Duffle Bag')]")
+  );
+
+  expect(elements2.length).toBe(1);
+  await sleep(timeWaitBetwen);
+
+  const btn = await driver.findElement(By.id("toHome"));
+  await btn.click();
   await sleep(timeWaitBetwen);
 });
 

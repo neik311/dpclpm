@@ -82,7 +82,7 @@ const Header = () => {
     <div>
       <div className="w-full h-[50px] bg-[#F5F5F5] text-[#666666] font-normal text-base fixed top-0 z-50 ">
         <div className="container flex items-center justify-between h-[40px] mx-auto px-36 pt-2">
-          <Link to="/">
+          <Link to="/" id="toHome">
             <div>
               <p className="text-[#000]">Camelia Brand ®</p>
             </div>

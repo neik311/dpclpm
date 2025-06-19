@@ -146,7 +146,7 @@ const Cart = () => {
                           name=""
                           min={1}
                           max={10}
-                          id=""
+                          id={"quantity"+idx}
                           value={
                             updatedQuantities[item.id] !== undefined
                               ? updatedQuantities[item.id]

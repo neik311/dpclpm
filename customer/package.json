@@ -39,6 +39,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
+    "test:1": "jest src/tests/homePage.test.js",
+    "test:2": "jest src/utils/checkout.test.js",
     "test:cov": "jest --coverage",
     "eject": "react-scripts eject"
   },
