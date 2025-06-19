@@ -68,7 +68,7 @@ const Sidebar = () => {
           >
             <Inventory2Icon className="" />
 
-            <h1 className="font-normal">Sản phẩm</h1>
+            <h1 className="font-normal" id="linkToProduct">Sản phẩm</h1>
           </NavLink>
 
           {user?.role === "admin" && (

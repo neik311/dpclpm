@@ -462,6 +462,7 @@ const Body = () => {
                     placeholder={selectedProduct?.productName}
                     className={classes.InputStyle}
                     type="text"
+                    id="productNameEdit"
                     value={value.productName}
                     onChange={(e) =>
                       setValue({

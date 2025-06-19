@@ -67,6 +67,7 @@ const LoginPage = () => {
                 value={email}
                 name="email"
                 type="email"
+                id="emailClient"
                 required
                 className="w-full px-6 py-4 text-sm font-medium bg-transparent border focus:border-[#157572] focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40  rounded-xl placeholder:text-text4 dark:placeholder:text-text2 dark:text-white border-strock text-text1 dark:border-darkStroke"
                 placeholder="example@gmail.com"
@@ -88,6 +89,7 @@ const LoginPage = () => {
                 value={password}
                 required
                 name="password"
+                id="passwordClient"
                 type={showPassword ? "text" : "password"}
                 className="relative w-full px-6 py-4 text-sm font-medium bg-transparent border focus:border-[#157572] focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40  rounded-xl placeholder:text-text4 dark:placeholder:text-text2 dark:text-white border-strock text-text1 dark:border-darkStroke"
                 placeholder="Nhập mật khẩu của bạn..."
@@ -110,6 +112,7 @@ const LoginPage = () => {
 
           <button
             type="submit"
+            id="loginClient"
             className="flex items-center justify-center p-4 text-base font-semibold rounded-xl min-h-[56px] bg-primary text-white  w-full"
           >
             Đăng nhập
