@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
+    "test:cov": "jest --coverage",
     "start": "nodemon --exec babel-node server.js"
   },
   "keywords": [],

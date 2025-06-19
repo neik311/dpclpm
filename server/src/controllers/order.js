@@ -5,6 +5,24 @@ export const createOrder = async (req, res) => {
   try {
     const { userId, productItems, shippingAddress, total_price } = req.body;
 
+    for (let item of productItems) {
+      const product = await db.Product.findOne({
+        where: { id: item.product_id },
+      });
+
+      // console.log(product.quantity, item.quantity)
+      //  throw new Error('Lỗi')
+
+      if (product.quantity < item.quantity) {
+        // throw new Error('Lỗi')
+        return res.status(200).json({
+          success: false,
+          message: "Lôi",
+          // retObj: newOrder,
+        });
+      }
+    }
+
     const newOrder = await db.Order.create({
       id: uuidv4(),
       user_id: userId,
