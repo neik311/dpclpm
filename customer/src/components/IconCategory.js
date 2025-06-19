@@ -28,6 +28,7 @@ const IconCategory = () => {
           height={60}
           data-categoryid={categories[0]?.id}
           onClick={(e) => handleCategoryClick(e)}
+          id="icon-click-1"
           src={
             selectedCategory === categories[0]?.id
               ? "https://theme.hstatic.net/1000365849/1000614631/14/vido.svg?v=178"

@@ -173,7 +173,7 @@ const Cart = () => {
               <div className="flex flex-col items-end mr-36">
                 <h4 className="text-4xl">Tổng tiền: {totalAmount}đ</h4>
                 <Link to="/checkout" className="button">
-                  <button className="px-5 py-3 mt-2 text-white bg-red-600 rounded-lg">
+                  <button className="px-5 py-3 mt-2 text-white bg-red-600 rounded-lg" id = "thanhtoan">
                     Thanh toán
                   </button>
                 </Link>

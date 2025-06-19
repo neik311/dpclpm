@@ -21,6 +21,7 @@ import {
   UPDATE_USER,
 } from "../actionTypes";
 import * as api from "../api/customerapi";
+import axios from "axios";
 import { APIPUBLIC } from "../config/config";
 
 export const userLogin = (formData, navigate) => async (dispatch) => {
@@ -88,27 +89,27 @@ export const addCart = (formData) => async (dispatch) => {
   }
 };
 
-export const addOrder = (formData) => async (dispatch) => {
+export const addOrder = (orderData) => async (dispatch) => {
   try {
-    const { data } = await api.addOrder(formData);
-    if (data.success === true) {
-      toast.success("Đặt hàng thành công hàng thành công!");
+    // const res = await axios.post("/api/order", orderData); // endpoint của bạn
+    const start = Date.now(); 
+    const res = await api.addOrder(orderData);
+    const end = Date.now();    // Ghi thời gian kết thúc
+    const elapsed = end - start;
+
+    console.log(`Thời gian thực hiện đặt hàng: ${elapsed} ms`);
+    if (res.data.success) {
       dispatch({ type: ADD_ORDER, payload: true });
     } else {
-      dispatch({ type: SET_ERRORS, payload: data });
+      alert("Số lượng đặt vượt quá số lượng tồn");
     }
-  } catch (error) {
-    if (
-      error.response &&
-      error.response.data &&
-      error.response.data.status === "error"
-    ) {
-      dispatch({ type: SET_ERRORS, payload: error.response });
-    } else {
-      console.log("Unknown error occurred");
-    }
+  } catch (err) {
+    const message = err.response?.data?.message || "Lỗi kết nối server";
+    // alert("Sô lượng sản phẩm không hợp lệ")
+    dispatch({ type: SET_ERRORS, payload: message });
   }
 };
+
 export const getCartUser = (userId) => async (dispatch) => {
   try {
     const { data } = await api.getCartUser(userId);

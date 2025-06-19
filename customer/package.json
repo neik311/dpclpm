@@ -39,6 +39,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
+    "test:cov": "jest --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -61,5 +62,16 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.3.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.test\\.js$",
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
   }
 }

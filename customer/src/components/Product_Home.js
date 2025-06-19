@@ -129,6 +129,7 @@ const Product_Home = () => {
 
         <div className="flex items-center mx-5 gap-x-2">
           <input
+            id="checkbox-search-1"
             type="checkbox"
             checked={freeship}
             onChange={(e) => setFreeship(e.target.checked)}

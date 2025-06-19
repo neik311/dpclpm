@@ -60,7 +60,7 @@ const Header = () => {
     var updatedList = [...activeProductFilters];
     updatedList = updatedList.filter((item) => {
       return (
-        item?.productName?.toLowerCase().indexOf(query.toLowerCase()) !== -1
+        item?.productName?.toLowerCase().indexOf(query.toLowerCase()?.trim()) !== -1
       );
     });
     setFilteredList(updatedList);
@@ -179,9 +179,9 @@ const Header = () => {
               )}
 
               <Link to="/cart" className="text-gray-600 hover:text-gray-900">
-                <div className="relative">
-                  <Badge color="primary" showZero>
-                    <AddShoppingCartIcon className="text-2xl" />
+                <div className="relative" id="cart" >
+                  <Badge color="primary" showZero >
+                    <AddShoppingCartIcon className="text-2xl"/>
                   </Badge>
                   {quantity?.length > 0 && (
                     <div className="absolute bottom-3 left-4 flex items-center justify-center w-5 h-5 text-xs text-white bg-[#d61c1f] rounded-full">

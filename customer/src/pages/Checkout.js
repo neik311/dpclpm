@@ -14,11 +14,13 @@ const Checkout = () => {
   const store = useSelector((state) => state);
   const userCarts = useSelector((state) => state.customer?.userCarts);
   const user = JSON.parse(localStorage.getItem("user"));
+
   const [totalAmount, setTotalAmount] = useState(null);
   const [shippingInfo, setShippingInfo] = useState({
     firstName: "",
     lastName: "",
     address: "",
+    phone: "",
   });
   const [cartProductState, setCartProductState] = useState([]);
 
@@ -28,8 +30,8 @@ const Checkout = () => {
       sum =
         sum +
         Number(userCarts[index].quantity) * userCarts[index]?.product.price;
-      setTotalAmount(sum);
     }
+    setTotalAmount(sum);
   }, [userCarts]);
 
   useEffect(() => {
@@ -42,19 +44,43 @@ const Checkout = () => {
       });
     }
     setCartProductState(items);
-  }, []);
+  }, [userCarts]);
+
+  const validateInput = () => {
+    const nameRegex = /^[a-zA-ZÀ-ỹà-ỹ\s]+$/u;
+    const phoneRegex = /^[0-9]{10}$/;
+
+    if (!shippingInfo.firstName || !shippingInfo.lastName || !shippingInfo.address || !shippingInfo.phone) {
+      alert("Vui lòng điền đầy đủ tất cả các thông tin.");
+      return false;
+    }
+
+    if (!nameRegex.test(shippingInfo.firstName) || !nameRegex.test(shippingInfo.lastName)) {
+      alert("Họ và tên không được chứa ký tự đặc biệt hoặc số.");
+      return false;
+    }
+
+    if (shippingInfo.firstName.length > 255 || shippingInfo.lastName.length > 255) {
+      alert("Họ và tên không được vượt quá 255 ký tự.");
+      return false;
+    }
+
+    if (shippingInfo.address.length > 255) {
+      alert("Địa chỉ không được vượt quá 255 ký tự.");
+      return false;
+    }
+
+    if (!phoneRegex.test(shippingInfo.phone)) {
+      alert("Số điện thoại phải đúng 10 chữ số và không có ký tự đặc biệt.");
+      return false;
+    }
+
+    return true;
+  };
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-
-    if (
-      !shippingInfo.firstName ||
-      !shippingInfo.lastName ||
-      !shippingInfo.address
-    ) {
-      alert("Vui lòng điền đầy đủ thông tin địa chỉ giao hàng!");
-      return;
-    }
+    if (!validateInput()) return;
 
     const orderData = {
       userId: user?.userData?.id,
@@ -73,7 +99,6 @@ const Checkout = () => {
         dispatch({ type: ADD_ORDER, payload: false });
         navigate("/success");
       }
-    } else {
     }
   }, [store.errors, store.customer.orderAdded]);
 
@@ -93,64 +118,64 @@ const Checkout = () => {
         >
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label
-                htmlFor="firstName"
-                className="block text-sm font-medium text-text2 dark:text-text3"
-              >
+              <label htmlFor="firstName" className="block text-sm font-medium text-text2 dark:text-text3">
                 Họ *
               </label>
               <input
-                onChange={(e) =>
-                  setShippingInfo({
-                    ...shippingInfo,
-                    firstName: e.target.value,
-                  })
-                }
+                onChange={(e) => setShippingInfo({ ...shippingInfo, firstName: e.target.value })}
                 value={shippingInfo.firstName}
                 name="firstName"
+                id="firstName"
                 type="text"
                 required
-                className="w-full px-4 py-2 text-sm font-medium bg-transparent border border-[#157572] focus:border-[#157572] focus:ring-secondary focus:outline-none focus:ring focus:ring-opacity-40 rounded-xl placeholder-text-text4 dark:placeholder-text-text2 dark:text-white"
+                className="w-full px-4 py-2 text-sm font-medium bg-transparent border border-[#157572] rounded-xl"
                 placeholder="Vũ Thị Hồng"
               />
             </div>
             <div>
-              <label
-                htmlFor="lastName"
-                className="block text-sm font-medium text-text2 dark:text-text3"
-              >
+              <label htmlFor="lastName" className="block text-sm font-medium text-text2 dark:text-text3">
                 Tên *
               </label>
               <input
-                onChange={(e) =>
-                  setShippingInfo({ ...shippingInfo, lastName: e.target.value })
-                }
+                onChange={(e) => setShippingInfo({ ...shippingInfo, lastName: e.target.value })}
                 value={shippingInfo.lastName}
                 name="lastName"
+                id="lastName"
                 type="text"
                 required
-                className="w-full px-4 py-2 text-sm font-medium bg-transparent border border-[#157572] focus:border-[#157572] focus:ring-secondary focus:outline-none focus:ring focus:ring-opacity-40 rounded-xl placeholder-text-text4 dark:placeholder-text-text2 dark:text-white"
+                className="w-full px-4 py-2 text-sm font-medium bg-transparent border border-[#157572] rounded-xl"
                 placeholder="Oanh"
               />
             </div>
           </div>
           <div>
-            <label
-              htmlFor="address"
-              className="block text-sm font-medium text-text2 dark:text-text3"
-            >
+            <label htmlFor="address" className="block text-sm font-medium text-text2 dark:text-text3">
               Địa chỉ giao hàng *
             </label>
             <input
-              onChange={(e) =>
-                setShippingInfo({ ...shippingInfo, address: e.target.value })
-              }
+              onChange={(e) => setShippingInfo({ ...shippingInfo, address: e.target.value })}
               value={shippingInfo.address}
               name="address"
+              id="address"
               type="text"
               required
-              className="w-full px-4 py-2 text-sm font-medium bg-transparent border border-[#157572] focus:border-[#157572] focus:ring-secondary focus:outline-none focus:ring focus:ring-opacity-40 rounded-xl placeholder-text-text4 dark:placeholder-text-text2 dark:text-white"
+              className="w-full px-4 py-2 text-sm font-medium bg-transparent border border-[#157572] rounded-xl"
               placeholder="97 Man Thiện"
+            />
+          </div>
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-text2 dark:text-text3">
+              Số điện thoại *
+            </label>
+            <input
+              onChange={(e) => setShippingInfo({ ...shippingInfo, phone: e.target.value })}
+              value={shippingInfo.phone}
+              name="phone"
+               id="phone"
+              type="text"
+              required
+              className="w-full px-4 py-2 text-sm font-medium bg-transparent border border-[#157572] rounded-xl"
+              placeholder="0987654321"
             />
           </div>
           <div className="text-text1 dark:text-darkStroke">
@@ -164,7 +189,6 @@ const Checkout = () => {
           </button>
         </form>
       </div>
-
       <Footer />
     </>
   );

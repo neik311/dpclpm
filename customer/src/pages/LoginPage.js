@@ -71,6 +71,7 @@ const LoginPage = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 name="email"
+                id="email"
                 type="email"
                 required
                 className="w-full px-6 py-4 text-sm font-medium bg-transparent border focus:border-[#157572] focus:ring-secondary focus:outline-none focus:ring focus:ring-opacity-40  rounded-xl placeholder:text-text4 dark:placeholder:text-text2 dark:text-white border-strock text-text1 dark:border-darkStroke"
@@ -93,6 +94,7 @@ const LoginPage = () => {
                 value={password}
                 required
                 name="password"
+                 id="password"
                 type={showPassword ? "text" : "password"}
                 className="relative w-full px-6 py-4 text-sm font-medium bg-transparent border focus:border-[#157572] focus:ring-secondary focus:outline-none focus:ring focus:ring-opacity-40  rounded-xl placeholder:text-text4 dark:placeholder:text-text2 dark:text-white border-strock text-text1 dark:border-darkStroke"
                 placeholder="Nhập mật khẩu của bạn.."
